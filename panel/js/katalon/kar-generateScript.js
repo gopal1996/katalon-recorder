@@ -422,6 +422,9 @@ $(function () {
       Close: function () {
         $(this).dialog("close");
       },
+      "Send to Orca": function () {
+        $(this).dialog("close");
+      },
     },
   });
   dialog.dialog({

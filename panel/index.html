@@ -94,46 +94,12 @@
                     <button id="record" class="sub_btn">Rec.</button>
                     <button id="playback" class="sub_btn" disabled>Play</button>
                     <button id="stop" class="sub_btn" style="display: none;">Stop</button>
-                    <button id="playSuite" class="sub_btn" disabled>P. Suite</button>
-                    <button id="playSuites" class="sub_btn" disabled>P. All</button>
+                    <!-- <button id="playSuite" class="sub_btn" disabled>P. Suite</button>
+                    <button id="playSuites" class="sub_btn" disabled>P. All</button> -->
                     <button id="pause" class="sub_btn btn_pr" disabled>Pause</button>
                     <button id="resume" class="sub_btn btn_pr" style="display: none;">Resume</button>
                 </div>
-                <div class="right-side">
-                    <a id="referral" class="sub_btn"
-                       href="https://www.katalon.com/referral/?utm_source=katalon_recorder&utm_medium=in-app_noti&utm_campaign=referral"
-                       target="_blank">
-                    </a>
-                    <button id="notification" class="sub_btn"></button>
-                    <div id="slider" style="display:none"></div>
-                    <div id="slider-container" style="display:none"></div>
-                    <button id="more" class="sub_btn"></button>
-                    <div class="dropdown">
-                        <div id="myDropdown" class="dropdown-content">
-                            <button id="speed" class="sub_btn">
-                                <i class="fa"></i>
-                                <div>Speed</div>
-                            </button>
-                            <button id="settings" class="sub_btn">
-                                <i class="fa"></i>
-                                <div>Settings</div>
-                            </button>
-                            <button id="help" class="sub_btn">
-                                <i class="fa"></i>
-                                <div>Help</div>
-                            </button>
-                            <button id="github" class="sub_btn">
-                                <i class="fa"></i>
-                                <div>Github</div>
-                            </button>
-                            <button id="extended-features" class="sub_btn">
-                                <i class="fa"></i>
-                                <div>Stats</div>
-                            </button>
-                            <a id="dailyUsage" style="display: none"></a>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -170,7 +136,7 @@
                             </div>
                         </article>
                     </div>
-                    <div id="testData-container" class="case_list">
+                    <!-- <div id="testData-container" class="case_list">
                         <div class="header">
                             <div class="left-side">
                                 <div id="testDataDropdown" class="dropdown">
@@ -189,8 +155,8 @@
                         <div id="data-files-list"></div>
                         <input id="load-data-file-hidden" type="file" accept=".csv,.json" multiple
                                style="display: none"/>
-                    </div>
-                    <div id="extensionScript-container" class="case_list">
+                    </div> -->
+                    <!-- <div id="extensionScript-container" class="case_list">
                         <div class="header">
                             <div class="left-side">
                                 <div id="extensionDropdown" class="dropdown">
@@ -208,11 +174,11 @@
                         </div>
                         <div id="extensions-list"></div>
                         <input id="load-extension-hidden" type="file" accept=".js" multiple style="display: none"/>
-                    </div>
+                    </div> -->
                 </div>
                 <div id="actions" class="module">
                     <header>ACTIONS</header>
-                    <div id="suite-open" class="header" title="Open new test suite">
+                    <!-- <div id="suite-open" class="header" title="Open new test suite">
                         <div class="icon">
                             <img src="/katalon/images/SVG/add-icon.svg">
                         </div>
@@ -223,15 +189,15 @@
                             <div id="suite-open-recorder">Open KR Test Suite</div>
                             <div id="suite-open-selenium">Open S.IDE Test Suite</div>
                         </div>
-                    </div>
-                    <div id="template-open" class="header" title="Add automation templates to learn about how Katalon Recorder works and help accelerate your automation progress”">
+                    </div> -->
+                    <!-- <div id="template-open" class="header" title="Add automation templates to learn about how Katalon Recorder works and help accelerate your automation progress”">
                         <div class="icon">
                             <img src="/katalon/images/SVG/open-template-sidebar-icon.svg">
                         </div>
                         <div class="title">
                             Templates
                         </div>
-                    </div>
+                    </div> -->
                     <div id="export" class="header" title="Export selected test suite to HTML file">
                         <div class="icon">
                             <img src="/katalon/images/SVG/export-test-suite-icon.svg">
@@ -240,22 +206,22 @@
                             Export
                         </div>
                     </div>
-                    <div id="test-ops-back-up-data" class="header" title="Upload your test suites to Katalon TestOps to safely restore them later">
+                    <!-- <div id="test-ops-back-up-data" class="header" title="Upload your test suites to Katalon TestOps to safely restore them later">
                         <div class="icon">
                             <img src="/katalon/images/SVG/backup-data-icon.svg">
                         </div>
                         <div class="title">
                             Backup data
                         </div>
-                    </div>
-                    <div id="ka-upload" class="header disable" title="Upload your test execution to Katalon TestOps to gain insightful reports and analytics">
+                    </div> -->
+                    <!-- <div id="ka-upload" class="header disable" title="Upload your test execution to Katalon TestOps to gain insightful reports and analytics">
                         <div class="icon">
                             <img src="/katalon/images/branding/ka_32x24px.png">
                         </div>
                         <div class="title">
                             Upload report
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -287,14 +253,7 @@
                         </div>
                     </div>
                     <div id="command-toolbar">
-                        <div id="command-toolbar-buttons">
-                            <button id="grid-add-btn"></button>
-                            <button id="grid-undo-btn"></button>
-                            <button id="grid-redo-btn"></button>
-                            <button id="grid-copy-btn"></button>
-                            <button id="grid-paste-btn"></button>
-                            <button id="grid-delete-btn"></button>
-                        </div>
+                        
                         <div class="fieldset">
                             <div class="command-row command-command">
                                 <label>Command</label>
@@ -329,95 +288,7 @@
                 </div>
 
             </div>
-            <div id="log-section">
-                <article class="module">
-                    <header class="tabs_involved">
-                        <ul class="tabs2">
-                            <li id="history-log"><a>Log</a></li>
-                            <li id="screenshot"><a>Screenshots</a></li>
-                            <li id="variable-log"><a>Variables</a></li>
-                            <li id="reference-log"><a>Reference</a></li>
-                            <li id="self-healing"><a>Self-healing</a></li>
-                        </ul>
-                        <ul class="tabs">
-                            <li id="ka-open">
-                                <a><img src="../katalon/images/branding/ka_32x24px.png" alt="Katalon TestOps"/>Dashboard</a>
-                            </li>
-                            <li id="save-log"><a title="Save logs as...">Save</a></li>
-                            <li id="clear-log"><a title="Clear logs">Clear</a></li>
-                            <li id="download-all"><a title="Download All">Download All</a></li>
-                            <li id="select-self-healing-test-status">
-                                <select name="self-healing-test-status"
-                                        style="color: var(--main-txt-color); background-color: var(--input-bg-color);">
-                                    <option value="All">All</option>
-                                    <option value="Passed">Passed</option>
-                                    <option value="Failed">Failed</option>
-                                </select>
-                            </li>
-                            <li id="collapse-console">
-                                <a href="javascript:void(0);" title="Toggle panel" id="show-hide-bottom-panel">
-                                    <img src="/katalon/images/SVG/log-container-close.svg" data-show="/katalon/images/SVG/log-container-open.svg" data-hide="/katalon/images/SVG/log-container-close.svg" alt="Show/Hide">
-                                </a>
-                            </li>
-                        </ul>
-                    </header>
-                    <div id="tab4" class="tab_content case_roll">
-                        <div class="module_content">
-                            <div id="logcontainer">
-                            </div>
-                            <div id="screenshotcontainer">
-                                <ul></ul>
-                            </div>
-                            <div id="variablecontainer">
-                                <table id="variable-grid">
-                                    <colgroup>
-                                        <col width="33.3333%">
-                                        <col width="33.3333%">
-                                        <col width="33.3333%">
-                                    </colgroup>
-                                    <thead>
-                                    <tr>
-                                        <th>Variable</th>
-                                        <th>Format</th>
-                                        <th>Value</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                                <div id="variable-grid-border"></div>
-                            </div>
-                            <div id="refercontainer">
-                            </div>
-                            <div id="selfHealingContainer" class="file-container">
-                                <table style="table-layout:fixed;word-wrap: break-word;">
-                                    <colgroup>
-                                        <col style="width:20%">
-                                        <col style="width:10%">
-                                        <col style="width:30%">
-                                        <col style="width:30%">
-                                        <col style="width:10%">
-                                    </colgroup>
-                                    <thead>
-                                    <tr>
-                                        <th>Test Case</th>
-                                        <th>Status</th>
-                                        <th>Broken Locator</th>
-                                        <th>Proposed</th>
-                                        <th>Approve</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="selfHealingList">
-                                    </tbody>
-                                </table>
-                                <button id="self-healing-approve-btn">Approve</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end of #tab4 -->
-                </article>
-                <!-- end of styles article -->
-            </div>
+            
         </article>
         <div class="clear"></div>
     </div>
@@ -435,25 +306,7 @@
         <div class="" style="height: 30px; line-height: 30px; margin-bottom: 12px;"><label
                 for="select-script-language-id">Format </label>
             <select style="margin:0 5px;" id="select-script-language-id" class="select-script-language">
-                <option value="cs-wd-mstest">C# (WebDriver + MSTest)</option>
-                <option value="cs-wd-nunit">C# (WebDriver + NUnit)</option>
-                <option value="java-wd-testng">Java (WebDriver + TestNG)</option>
-                <option value="java-wd-junit">Java (WebDriver + JUnit)</option>
-                <option value="java-rc-junit">Java (WebDriver-backed Remote Control + JUnit)</option>
-                <option value="new-formatter-dynatrace">JSON (Dynatrace Synthetics)</option>
                 <option value="katalon" selected>Katalon Studio</option>
-                <option value="new-formatter-nrsynthetics">Node (New Relic Synthetics)</option>
-                <option value="new-formatter-protractorts">Protractor (Typescript)</option>
-                <option value="python2-wd-unittest">Python 2 (WebDriver + unittest)</option>
-                <option value="python-appdynamics">Python (AppDynamics)</option>
-                <option value="robot">Robot Framework</option>
-                <option value="ruby-wd-rspec">Ruby (WebDriver + RSpec)</option>
-                <option value="new-formatter-webdriver">WebDriver.io</option>
-                <option value="xml">XML</option>
-                <!-- must start with new-formatter- -->
-                <option value="new-formatter-sample">Sample for new formatters</option>
-                <option value="new-formatter-puppeteer">Puppeteer</option>
-                <option value="new-formatter-puppeteer_w_comment">Puppeteer w Comments</option>
                 <option value="new-formatter-puppeteer_json">JSON (puppeteer)</option>
             </select>
             <div style="display: inline-block;">You can add your own formatter. Read more <a target="_blank"

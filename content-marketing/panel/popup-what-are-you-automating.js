@@ -49,20 +49,21 @@ function popupWhatAreYouAutomating() {
         <button id="whatAreYouAutomating-submit" class="whatAreYouAutomatingBtn" type="button">Submit</button>
     </div>`;
 
-  popup = $('<div id="whatAreYouAutomatingPopup"></div>').css({
-    'position': 'absolute',
-    'display': 'none',
-    'bottom': '50px',
-    'z-index': '1',
-    'background-color': '#f1f1f1',
-    'max-width': '350px',
-    'box-shadow': '0px 8px 16px 0px rgba(0,0,0,0.2)',
-    'padding': '10px',
-    'margin-bottom': '-1%',
-    'right': '0',
-    'color': 'black'
-
-  }).html(dialogHTML);
+  popup = $('<div id="whatAreYouAutomatingPopup"></div>')
+    .css({
+      position: "absolute",
+      display: "none",
+      bottom: "50px",
+      "z-index": "1",
+      "background-color": "#f1f1f1",
+      "max-width": "350px",
+      "box-shadow": "0px 8px 16px 0px rgba(0,0,0,0.2)",
+      padding: "10px",
+      "margin-bottom": "-1%",
+      right: "0",
+      color: "black",
+    })
+    .html(dialogHTML);
   $("body").append(popup);
   $(popup).show();
 
@@ -75,9 +76,8 @@ function popupWhatAreYouAutomating() {
     let userInput = $("#useCase").val();
     trackingSegment("kru_popup_automation_use_case", { answer: userInput });
     $(popup).remove();
-  })
+  });
 }
-
 
 async function changeHandler(changes) {
   if (Object.keys(changes).includes("checkLoginData")) {
@@ -85,14 +85,14 @@ async function changeHandler(changes) {
     let newValue = changes.checkLoginData.newValue;
     let changeProperty = getChangedProperty(oldValue, newValue);
     if (changeProperty === "testCreated") {
-      if (newValue.testCreated === 4) {
-        popupWhatAreYouAutomating();
-        browser.storage.onChanged.removeListener(changeHandler);
-      }
+      // if (newValue.testCreated === 4) {
+      //   popupWhatAreYouAutomating();
+      //   browser.storage.onChanged.removeListener(changeHandler);
+      // }
     }
   }
 }
 
 $(document).ready(function () {
   browser.storage.onChanged.addListener(changeHandler);
-})
+});

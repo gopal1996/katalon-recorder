@@ -3,7 +3,7 @@ import { getAllTestCaseCount } from "../../panel/js/UI/services/data-service/tes
 let succeedReferral;
 
 function popupDailyUsageDialog() {
-    let html = `
+  let html = `
 <style>
 .myDialog .ui-dialog-titlebar { display: none; }
 .bg{
@@ -187,122 +187,157 @@ function popupDailyUsageDialog() {
 </div>
 <div class="close-text" id="close-usage">Continue your work</div>
   `;
-    browser.storage.local.get('usageDay').then(function (result) {
-        html = html.replace("{{numExc}}", result.usageDay ? (result.usageDay.numExc ? result.usageDay.numExc : 0) : 0);
-        html = html.replace("{{numTestSuites}}", result.usageDay ? (result.usageDay.numTestSuites ? result.usageDay.numTestSuites : 0) : 0);
-        html = html.replace("{{numTest}}", result.usageDay ? (result.usageDay.numTest ? result.usageDay.numTest : 0) : 0);
+  browser.storage.local.get("usageDay").then(function (result) {
+    html = html.replace(
+      "{{numExc}}",
+      result.usageDay
+        ? result.usageDay.numExc
+          ? result.usageDay.numExc
+          : 0
+        : 0
+    );
+    html = html.replace(
+      "{{numTestSuites}}",
+      result.usageDay
+        ? result.usageDay.numTestSuites
+          ? result.usageDay.numTestSuites
+          : 0
+        : 0
+    );
+    html = html.replace(
+      "{{numTest}}",
+      result.usageDay
+        ? result.usageDay.numTest
+          ? result.usageDay.numTest
+          : 0
+        : 0
+    );
 
-        const usageDialog = $('<div id="usage"></div>')
-            .html(html)
-            .dialog({
-                dialogClass: 'myDialog',
-                resizable: true,
-                modal: true,
-                width: '450',
-                height: '620',
-                close: function() {
-                    $(this).remove();
-                }
-            });
+    const usageDialog = $('<div id="usage"></div>')
+      .html(html)
+      .dialog({
+        dialogClass: "myDialog",
+        resizable: true,
+        modal: true,
+        width: "450",
+        height: "620",
+        close: function () {
+          $(this).remove();
+        },
+      });
 
-        $('#close-usage').on('click', function() {
-            clearInterval(succeedReferral);
-            $(usageDialog).dialog('close');
-        })
-    })
+    $("#close-usage").on("click", function () {
+      clearInterval(succeedReferral);
+      $(usageDialog).dialog("close");
+    });
+  });
 }
 
 function setBeginningAndEndTime(startedAt) {
-    let start = new Date(startedAt);
-    start.setHours(0, 0, 0, 0);
+  let start = new Date(startedAt);
+  start.setHours(0, 0, 0, 0);
 
-    let end = new Date(startedAt);
-    end.setHours(23, 59, 59, 999);
+  let end = new Date(startedAt);
+  end.setHours(23, 59, 59, 999);
 
-    return { start, end };
+  return { start, end };
 }
 
 function checkSucceedReferral() {
-    browser.storage.local.get('sharingSocial').then(function (result) {
-        if (result.sharingSocial) {
-            switch (true) {
-                case result.sharingSocial.isSharedFB:
-                    _gaq.push(['_trackEvent', 'referral-v1', 'share-completion', 'facebook']);
-                    browser.storage.local.remove('sharingSocial');
-                    if ($('#usage').is(':visible')) {
-                        $('#usage').dialog('close');
-                        clearInterval(succeedReferral);
-                    }
-                    break;
-                case result.sharingSocial.isSharedLinkedIn:
-                    _gaq.push(['_trackEvent', 'referral-v1', 'share-completion', 'linkedin']);
-                    browser.storage.local.remove('sharingSocial');
-                    if ($('#usage').is(':visible')) {
-                        $('#usage').dialog('close');
-                        clearInterval(succeedReferral);
-                    }
-                    break;
-                case result.sharingSocial.isSharedTwitter:
-                    _gaq.push(['_trackEvent', 'referral-v1', 'share-completion', 'twitter']);
-                    browser.storage.local.remove('sharingSocial');
-                    if ($('#usage').is(':visible')) {
-                        $('#usage').dialog('close');
-                        clearInterval(succeedReferral);
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-        }
-    })
+  browser.storage.local.get("sharingSocial").then(function (result) {
+    if (result.sharingSocial) {
+      switch (true) {
+        case result.sharingSocial.isSharedFB:
+          _gaq.push([
+            "_trackEvent",
+            "referral-v1",
+            "share-completion",
+            "facebook",
+          ]);
+          browser.storage.local.remove("sharingSocial");
+          if ($("#usage").is(":visible")) {
+            $("#usage").dialog("close");
+            clearInterval(succeedReferral);
+          }
+          break;
+        case result.sharingSocial.isSharedLinkedIn:
+          _gaq.push([
+            "_trackEvent",
+            "referral-v1",
+            "share-completion",
+            "linkedin",
+          ]);
+          browser.storage.local.remove("sharingSocial");
+          if ($("#usage").is(":visible")) {
+            $("#usage").dialog("close");
+            clearInterval(succeedReferral);
+          }
+          break;
+        case result.sharingSocial.isSharedTwitter:
+          _gaq.push([
+            "_trackEvent",
+            "referral-v1",
+            "share-completion",
+            "twitter",
+          ]);
+          browser.storage.local.remove("sharingSocial");
+          if ($("#usage").is(":visible")) {
+            $("#usage").dialog("close");
+            clearInterval(succeedReferral);
+          }
+          break;
+        default:
+          break;
+      }
+    }
+  });
 }
 
 function setUsageSummary(type) {
-    browser.storage.local.get('usageDay').then(function (result) {
-        if (!result.usageDay) {
-            result = {
-                usageDay: {
-                    numTest: 0,
-                    numExc: 0,
-                    numTestSuites: 0
-                }
-            };
-        }
-        let usageDay = result.usageDay;
+  browser.storage.local.get("usageDay").then(function (result) {
+    if (!result.usageDay) {
+      result = {
+        usageDay: {
+          numTest: 0,
+          numExc: 0,
+          numTestSuites: 0,
+        },
+      };
+    }
+    let usageDay = result.usageDay;
 
-        switch (type) {
-            case "playCase":
-                usageDay.numExc++;
-                break;
-            case "playSuite":
-                let cases = getSelectedSuite().getElementsByTagName("p");
-                usageDay.numExc += cases.length;
-                break;
-            case "playSuites":
-                usageDay.numExc += getAllTestCaseCount();
-                break;
-            case "newTestcase":
-                usageDay.numTest++;
-                break;
-            case "newTestsuite":
-                usageDay.numTestSuites++;
-                break;
-            case "newInitRecord":
-                if (!getSelectedSuite() || !getSelectedCase()) {
-                    usageDay.numTest++;
-                    usageDay.numTestSuites++;
-                }
-                break;
-            default:
-                break;
+    switch (type) {
+      case "playCase":
+        usageDay.numExc++;
+        break;
+      case "playSuite":
+        let cases = getSelectedSuite().getElementsByTagName("p");
+        usageDay.numExc += cases.length;
+        break;
+      case "playSuites":
+        usageDay.numExc += getAllTestCaseCount();
+        break;
+      case "newTestcase":
+        usageDay.numTest++;
+        break;
+      case "newTestsuite":
+        usageDay.numTestSuites++;
+        break;
+      case "newInitRecord":
+        if (!getSelectedSuite() || !getSelectedCase()) {
+          usageDay.numTest++;
+          usageDay.numTestSuites++;
         }
-        browser.storage.local.set(result);
-    });
+        break;
+      default:
+        break;
+    }
+    browser.storage.local.set(result);
+  });
 }
 
-function popupShareUsDialog(){
-    let dialogHTML = `
+function popupShareUsDialog() {
+  let dialogHTML = `
     <div style="text-align:center; font-size: 15px;"><strong>Make your work seen!</strong></div>
     </br>
     <span>
@@ -332,209 +367,219 @@ function popupShareUsDialog(){
         <button id="shareUS-accept" class="shareUsBtn" type="button">Yep, why not?</button>
     </div>`;
 
-    let popup = $('<div id="shareUsDialog"></div>').css({
-        'position': 'absolute',
-        'display': 'none',
-        'bottom': '50px',
-        'z-index': '1',
-        'background-color': '#f1f1f1',
-        'max-width': '200px',
-        'box-shadow': '0px 8px 16px 0px rgba(0,0,0,0.2)',
-        'padding': '20px',
-        'margin-bottom': '-1%',
-        'right': '0',
-        'color': 'black'
-    }).html(dialogHTML);
-    $("body").append(popup);
+  let popup = $('<div id="shareUsDialog"></div>')
+    .css({
+      position: "absolute",
+      display: "none",
+      bottom: "50px",
+      "z-index": "1",
+      "background-color": "#f1f1f1",
+      "max-width": "200px",
+      "box-shadow": "0px 8px 16px 0px rgba(0,0,0,0.2)",
+      padding: "20px",
+      "margin-bottom": "-1%",
+      right: "0",
+      color: "black",
+    })
+    .html(dialogHTML);
+  $("body").append(popup);
 
-    $("#shareUS-later").click(function (){
-        $("#shareUsDialog").hide();
-    });
+  $("#shareUS-later").click(function () {
+    $("#shareUsDialog").hide();
+  });
 
-    $("#shareUS-accept").click(function (){
-        popupDailyUsageDialog();
-        $("#shareUsDialog").hide();
-    });
-    $(popup).show();
+  $("#shareUS-accept").click(function () {
+    popupDailyUsageDialog();
+    $("#shareUsDialog").hide();
+  });
+  $(popup).show();
 }
 
 function setNewDay(result) {
-    let startup = result.startup;
+  let startup = result.startup;
 
-    let yesterday = setBeginningAndEndTime(startup.startedAt);
-    let today = new Date();
-    if (yesterday.end.getTime() < today.getTime()) {
-        startup.startedAt = Date();
-        startup.isCheckedPopup = false;
-        browser.storage.local.set(result);
-        browser.storage.local.remove('usageDay');
-    }
+  let yesterday = setBeginningAndEndTime(startup.startedAt);
+  let today = new Date();
+  if (yesterday.end.getTime() < today.getTime()) {
+    startup.startedAt = Date();
+    startup.isCheckedPopup = false;
+    browser.storage.local.set(result);
+    browser.storage.local.remove("usageDay");
+  }
 
-    let checkedTime = (today.getTime() - new Date(startup.startedAt).getTime()) / 1000;
-    //check time to popup dialog in day
-    if (checkedTime >= 1800 && !startup.isCheckedPopup) {
-        startup.isCheckedPopup = true;
-        browser.storage.local.set(result);
-        popupShareUsDialog();
-    }
+  // let checkedTime = (today.getTime() - new Date(startup.startedAt).getTime()) / 1000;
+  //check time to popup dialog in day
+  // if (checkedTime >= 1800 && !startup.isCheckedPopup) {
+  //     startup.isCheckedPopup = true;
+  //     browser.storage.local.set(result);
+  //     popupShareUsDialog();
+  // }
 }
 
 $(() => {
-    browser.storage.local.get('startup').then(function (result) {
-        if (!result.startup) {
-            result = {
-                startup: {
-                    startedAt: Date(),
-                    isCheckedPopup: false
-                }
-            };
-            browser.storage.local.set(result);
-        } else {
-            setNewDay(result);
-        }
+  browser.storage.local.get("startup").then(function (result) {
+    if (!result.startup) {
+      result = {
+        startup: {
+          startedAt: Date(),
+          isCheckedPopup: false,
+        },
+      };
+      browser.storage.local.set(result);
+    } else {
+      setNewDay(result);
+    }
+  });
+
+  $("#dailyUsage").click(() => {
+    popupDailyUsageDialog();
+    succeedReferral = setInterval(() => {
+      checkSucceedReferral();
+    }, 500);
+    _gaq.push(["_trackEvent", "referral-v1", "view-usage-summary"]);
+    $("#myDropdown").fadeOut();
+  });
+
+  $("#essentialProductTours").click(() => {
+    Promise.all([
+      import(
+        "../../panel/js/UI/services/onboarding-service/onboarding-sample-data.js"
+      ),
+      import("../../panel/js/UI/controllers/onboarding/onboarding-listener.js"),
+    ]).then((obj) => {
+      const { addOnboardingSampleData } = obj[0];
+      const { startEssentialProductTours } = obj[1];
+      addOnboardingSampleData().then(() => {
+        startEssentialProductTours(true);
+        $("#myDropdown").fadeOut();
+      });
     });
+  });
 
-    $('#dailyUsage').click(() => {
-        popupDailyUsageDialog();
-        succeedReferral = setInterval(() => {
-            checkSucceedReferral();
-        }, 500);
-        _gaq.push(['_trackEvent', 'referral-v1', 'view-usage-summary']);
-        $('#myDropdown').fadeOut();
-    })
+  $("#add-testCase").click(function () {
+    setUsageSummary("newTestcase");
+  });
+  $("#add-testSuite").click(function () {
+    setUsageSummary("newTestsuite");
+  });
 
-    $("#essentialProductTours").click(() => {
-        Promise.all([
-            import ("../../panel/js/UI/services/onboarding-service/onboarding-sample-data.js"),
-            import ("../../panel/js/UI/controllers/onboarding/onboarding-listener.js"),
-        ]).then((obj) => {
-            const { addOnboardingSampleData } = obj[0];
-            const { startEssentialProductTours } = obj[1];
-            addOnboardingSampleData().then(() => {
-                startEssentialProductTours(true);
-                $("#myDropdown").fadeOut();
-            });
-        });
-    });
+  $("#playback").click(function () {
+    setUsageSummary("playCase");
+  });
 
-    $('#add-testCase').click(function() {
-        setUsageSummary("newTestcase");
-    });
-    $('#add-testSuite').click(function() {
-        setUsageSummary("newTestsuite");
-    })
+  $("#playSuite").click(function () {
+    setUsageSummary("playSuite");
+  });
 
-    $('#playback').click(function() {
-        setUsageSummary("playCase");
-    })
+  $("#playSuites").click(function () {
+    setUsageSummary("playSuites");
+  });
 
-    $('#playSuite').click(function() {
-        setUsageSummary("playSuite");
-    })
-
-    $('#playSuites').click(function() {
-        setUsageSummary("playSuites");
-    })
-
-    $('#record').click(function() {
-        setUsageSummary("newInitRecord");
-    })
-})
+  $("#record").click(function () {
+    setUsageSummary("newInitRecord");
+  });
+});
 
 let sharingFb = {
-    uri: 'https://www.facebook.com/sharer/sharer.php',
-    href: 'https://www.katalon.com/katalon-recorder-ide/?utm_source=kr&utm_medium=fb-referral&utm_campaign=kr%20referral',
-    hashtag: '#KatalonRecorder'
+  uri: "https://www.facebook.com/sharer/sharer.php",
+  href: "https://www.katalon.com/katalon-recorder-ide/?utm_source=kr&utm_medium=fb-referral&utm_campaign=kr%20referral",
+  hashtag: "#KatalonRecorder",
 };
 
 let sharingLinkedIn = {
-    uri: 'https://www.linkedin.com/sharing/share-offsite/',
-    url: 'https://www.katalon.com/katalon-recorder-ide/?utm_source=kr&utm_medium=li-referral&utm_campaign=kr%20referral/',
-}
+  uri: "https://www.linkedin.com/sharing/share-offsite/",
+  url: "https://www.katalon.com/katalon-recorder-ide/?utm_source=kr&utm_medium=li-referral&utm_campaign=kr%20referral/",
+};
 
 let sharingTwitter = {
-    uri: 'http://twitter.com/share',
-    text: '',
-    url: 'https://www.katalon.com/katalon-recorder-ide/?utm_source=kr&utm_medium=tw-referral&utm_campaign=kr%20referral',
-    hashtags: 'KatalonRecorder,WebAutomation',
-}
+  uri: "http://twitter.com/share",
+  text: "",
+  url: "https://www.katalon.com/katalon-recorder-ide/?utm_source=kr&utm_medium=tw-referral&utm_campaign=kr%20referral",
+  hashtags: "KatalonRecorder,WebAutomation",
+};
 
 const contentMap = [
-    "Let's pursue a life free from the hassles of doing the same things over and over again."
-]
+  "Let's pursue a life free from the hassles of doing the same things over and over again.",
+];
 
-let urlEndpoint = 'https://backend.katalon.com/api/upload-kr';
+let urlEndpoint = "https://backend.katalon.com/api/upload-kr";
 
 function dataURItoBlob(dataURI) {
-    var byteString;
-    if (dataURI.split(',')[0].indexOf('base64') >= 0)
-        byteString = atob(dataURI.split(',')[1]);
-    else
-        byteString = unescape(dataURI.split(',')[1]);
+  var byteString;
+  if (dataURI.split(",")[0].indexOf("base64") >= 0)
+    byteString = atob(dataURI.split(",")[1]);
+  else byteString = unescape(dataURI.split(",")[1]);
 
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+  var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
 
-    var ia = new Uint8Array(byteString.length);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
+  var ia = new Uint8Array(byteString.length);
+  for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
 
-    return new Blob([ia], { type: mimeString });
+  return new Blob([ia], { type: mimeString });
 }
 
 function convertHTMLtoPNG() {
-    let imageConvert = $('#capture-img');
+  let imageConvert = $("#capture-img");
 
-    return html2canvas(imageConvert[0]).then(function(canvas) {
-        var imgData = canvas.toDataURL('image/png', 1.0);
+  return html2canvas(imageConvert[0]).then(function (canvas) {
+    var imgData = canvas.toDataURL("image/png", 1.0);
 
-        const formData = new FormData();
-        formData.append('file', dataURItoBlob(imgData), 'sharing-img.png');
-        return fetch(`${urlEndpoint}`, {
-            method: 'POST',
-            body: formData
-        }).then(
-            response => response.json()
-        ).then(
-            success => success
-        ).catch(
-            error => error
-        );
-    });
+    const formData = new FormData();
+    formData.append("file", dataURItoBlob(imgData), "sharing-img.png");
+    return fetch(`${urlEndpoint}`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((success) => success)
+      .catch((error) => error);
+  });
 }
 
 //sharing to Facebook
-$(document).on('click', '#sharingFb', function() {
-            convertHTMLtoPNG().then(rs => {
-                        let url = sharingFb.uri;
-                        url += `?u=${encodeURIComponent(`${urlEndpoint}/${rs.key}`)}`;
-        url += `&hashtag=${encodeURIComponent(sharingFb.hashtag)} — The most popular web automation tool.`;
-        url += `&quote=${contentMap[Math.floor(Math.random() * contentMap.length)]}` + escape(`\n\n Find out more at `) +  `${encodeURIComponent(sharingFb.href)}` + escape(`\n\n`);
-        window.open(url);
-        _gaq.push(['_trackEvent', 'referral-v1', 'share-intention', 'facebook']);
-    });
+$(document).on("click", "#sharingFb", function () {
+  convertHTMLtoPNG().then((rs) => {
+    let url = sharingFb.uri;
+    url += `?u=${encodeURIComponent(`${urlEndpoint}/${rs.key}`)}`;
+    url += `&hashtag=${encodeURIComponent(
+      sharingFb.hashtag
+    )} — The most popular web automation tool.`;
+    url +=
+      `&quote=${contentMap[Math.floor(Math.random() * contentMap.length)]}` +
+      escape(`\n\n Find out more at `) +
+      `${encodeURIComponent(sharingFb.href)}` +
+      escape(`\n\n`);
+    window.open(url);
+    _gaq.push(["_trackEvent", "referral-v1", "share-intention", "facebook"]);
+  });
 });
 
 //sharing to Twitter
-$(document).on('click', '#sharingTwitter', function() {
-            convertHTMLtoPNG().then(rs => {
-                        let url = sharingTwitter.uri;
-                        url += `?url=${encodeURIComponent(`${urlEndpoint}/${rs.key}`)}`;
-        url += `&hashtags=${encodeURIComponent(sharingTwitter.hashtags)} — The most popular web automation tool.`;
-        url += `&text=${contentMap[Math.floor(Math.random() * contentMap.length)]}` + escape(`\n\n Find out more at `) + `${encodeURIComponent(sharingTwitter.url)}` + escape(`\n\n`);
-        const sharing = window.open(url);
-        _gaq.push(['_trackEvent', 'referral-v1', 'share-intention', 'twitter']);
-    });
+$(document).on("click", "#sharingTwitter", function () {
+  convertHTMLtoPNG().then((rs) => {
+    let url = sharingTwitter.uri;
+    url += `?url=${encodeURIComponent(`${urlEndpoint}/${rs.key}`)}`;
+    url += `&hashtags=${encodeURIComponent(
+      sharingTwitter.hashtags
+    )} — The most popular web automation tool.`;
+    url +=
+      `&text=${contentMap[Math.floor(Math.random() * contentMap.length)]}` +
+      escape(`\n\n Find out more at `) +
+      `${encodeURIComponent(sharingTwitter.url)}` +
+      escape(`\n\n`);
+    const sharing = window.open(url);
+    _gaq.push(["_trackEvent", "referral-v1", "share-intention", "twitter"]);
+  });
 });
 
 //sharing to LinkedIn
-$(document).on('click', '#sharingLinkedIn', function () {
-    convertHTMLtoPNG().then(rs => {
-        let url = sharingLinkedIn.uri;
-        url += `?url=${encodeURIComponent(`${urlEndpoint}/${rs.key}`)}`;
-        window.open(url);
-        _gaq.push(['_trackEvent', 'referral-v1', 'share-intention', 'linkedin']);
-    });
+$(document).on("click", "#sharingLinkedIn", function () {
+  convertHTMLtoPNG().then((rs) => {
+    let url = sharingLinkedIn.uri;
+    url += `?url=${encodeURIComponent(`${urlEndpoint}/${rs.key}`)}`;
+    window.open(url);
+    _gaq.push(["_trackEvent", "referral-v1", "share-intention", "linkedin"]);
+  });
 });
-
-
