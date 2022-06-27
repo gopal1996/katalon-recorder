@@ -159,6 +159,13 @@ function loadScripts() {
       if (j == scriptNames.length) {
         clearInterval(interval);
         generateScripts(isExternalCapability, language);
+        generateScripts(isExternalCapability, "new-formatter-puppeteer_json",function (name, commands) {
+          return {
+              content: JSON.stringify(commands),
+              extension: 'json',
+              mimetype: 'application/ld-json'
+          }
+      } );
       }
     }, 100);
   }
@@ -232,7 +239,7 @@ function generateScripts(isExternalCapability, language, newFormatter) {
     testCase.formatLocal(name).header = "";
     testCase.formatLocal(name).footer = "";
 
-    displayOnCodeMirror(language, format(testCase, name));
+
 
     $("[id^=formatter-script-language-id-]").remove();
     var script = document.createElement("script");
